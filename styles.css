@@ -1,0 +1,365 @@
+/* ================= Dark Mode Variables ================= */
+:root {
+  --bg: #0f1724;
+  --card: #0b1220;
+  --muted: #9aa4b2;
+  --accent: #ffffff;
+  --incoming: rgba(255, 255, 255, 0.08);
+  --outgoing: #9f8fbd;
+}
+
+/* ================= Global Styles ================= */
+* { box-sizing: border-box; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+body, html { margin: 0; padding: 0; height: 100%; width: 100%; background: var(--bg); color: var(--accent); display: flex; justify-content: center; align-items: center; }
+
+/* ================= App Container ================= */
+.app {
+  display: flex;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  max-width: 1920px;
+  max-height: 1080px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  gap: 12px;
+}
+
+/* ================= Sidebar ================= */
+.sidebar {
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  background: var(--card);
+  border-radius: 8px;
+  gap: 12px;
+  height: 100%;
+  position: relative;
+}
+
+.sidebar h2 { margin: 0; font-size: 18px; color: var(--accent); }
+
+/* ================= Search Bar ================= */
+.search-bar {
+  width: 100%;
+  padding: 8px 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--accent);
+  font-size: 14px;
+  outline: none;
+  transition: background 0.2s, border 0.2s;
+}
+.search-bar::placeholder { color: var(--muted); }
+.search-bar:focus { background: rgba(255, 255, 255, 0.1); border-color: var(--accent); }
+
+/* ================= Friend List ================= */
+.friend-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.friend-card:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.friend-card img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--accent);
+}
+
+.friend-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.friend-name {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.friend-username {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.friend-bio {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.friend-status {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.friend-status .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.friend-status.online .dot { background-color: #4caf50; }
+.friend-status.offline .dot { background-color: #f44336; }
+
+/* ================= My Profile ================= */
+.my-profile {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 10px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  position: absolute;
+  bottom: 10px;
+  width: calc(100% - 20px);
+  background: var(--card);
+  cursor: pointer;
+}
+
+.my-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--accent);
+}
+
+.my-name { font-size: 14px; color: var(--accent); font-weight: 500; }
+.my-status {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Status dot */
+.my-status.online::before,
+.my-status.offline::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.my-status.online::before { background-color: #4caf50; }
+.my-status.offline::before { background-color: #f44336; }
+
+/* ================= Chat Header ================= */
+.chat-header { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); background: var(--card); }
+.chat-header .avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255,255,255,0.2); cursor: default; }
+#chatName { font-size: 16px; font-weight: 600; color: var(--accent); }
+
+/* ================= Chat Panel ================= */
+.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: var(--card);
+  border-radius: 8px;
+  gap: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.messages { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-right: 4px; }
+
+/* ================= Message Bubbles ================= */
+.message {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  background: var(--incoming);
+  color: #e6eef6;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.3s forwards;
+  word-wrap: break-word;
+}
+.message.me { align-self: flex-end; background: var(--outgoing); color: var(--bg); }
+@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+/* ================= Send Form ================= */
+.sendForm { display: flex; gap: 8px; }
+.sendForm input { flex: 1; padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); background: transparent; color: var(--accent); }
+.sendForm button { padding: 8px 12px; border-radius: 8px; border: none; cursor: pointer; background: var(--accent); color: var(--bg); }
+
+/* ================= Scrollbars ================= */
+.sidebar::-webkit-scrollbar, .messages::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-track, .messages::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.03); border-radius: 3px; }
+.sidebar::-webkit-scrollbar-thumb, .messages::-webkit-scrollbar-thumb { background-color: rgba(255,255,255,0.2); border-radius: 10px; }
+.sidebar::-webkit-scrollbar-thumb:hover, .messages::-webkit-scrollbar-thumb:hover { background-color: rgba(255,255,255,0.35); }
+.sidebar, .messages { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.2) rgba(255,255,255,0.03); }
+
+/* ================= Profile Sidebar ================= */
+/* ================= Profile Sidebar ================= */
+.profile-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  background: var(--card);
+  padding: 16px;
+  box-shadow: -4px 0 10px rgba(0,0,0,0.5);
+  z-index: 1000;
+  overflow-y: auto;
+  transform: translateX(100%); /* start off-screen */
+  transition: transform 0.3s ease; /* smooth slide */
+}
+
+.profile-sidebar.open {
+  transform: translateX(0); /* slide in */
+}
+
+/* Header */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+#closeProfile {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Profile Avatar */
+.profile-avatar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.profile-avatar-wrapper img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  margin-bottom: 8px;
+  object-fit: cover;
+}
+.profile-avatar-wrapper button {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+/* Inputs */
+.profile-content label {
+  display: block;
+  margin-bottom: 4px;
+  margin-top: 8px;
+  font-size: 14px;
+}
+.profile-content input,
+.profile-content textarea,
+.profile-content select {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: var(--accent);
+  font-size: 14px;
+  outline: none;
+}
+.profile-content textarea {
+  resize: none;
+  height: 60px;
+}
+
+/* Save Button */
+.profile-content button {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  background: var(--accent);
+  color: var(--bg);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.profile-content button:hover {
+  background: rgba(255,255,255,0.8);
+  color: var(--bg);
+}
+
+/* ================= Responsive ================= */
+
+/* Desktop: default (sidebar + chat visible) */
+@media (min-width: 769px) {
+  .app {
+    flex-direction: row;
+  }
+  .sidebar {
+    display: flex;
+    width: 260px;
+  }
+  .chat {
+    display: flex;
+  }
+  .back-btn {
+    display: none; /* back button hidden on desktop */
+  }
+}
+
+/* Mobile: show only sidebar OR chat */
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+    padding:0;
+  }
+  .sidebar {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  .chat {
+    display: none; /* hidden until friend clicked */
+    flex: 1;
+  }
+  .chat.active {
+    display: flex; /* show chat when active */
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+  .back-btn {
+    display: inline-block;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+}
+

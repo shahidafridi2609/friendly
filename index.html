@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friendly - Messaging Platform</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <h2>Friendly</h2>
+      <input type="text" id="searchUser" class="search-bar" placeholder="Search friends...">
+      <div id="friendList" class="friend-list"></div>
+
+      <!-- Bottom Profile -->
+      <div class="my-profile" id="myProfile">
+        <img id="myAvatar" class="my-avatar" src="log0.png" alt="My Avatar">
+        <div>
+          <div class="my-name" id="myName">Set Username</div>
+          <div class="my-status" id="myStatus">Offline</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Chat Panel -->
+    <section class="chat">
+      <div class="chat-header">
+        <button id="backBtn" class="back-btn">←</button>
+        <img id="chatAvatar" src="avatar.png" alt="avatar" width="40" height="40">
+        <span id="chatName">Select a conversation</span>
+      </div>
+
+      <div class="messages" id="messages"></div>
+
+      <form id="sendForm" class="sendForm">
+        <input id="messageInput" placeholder="Type a message..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </div>
+
+  <!-- Overlay for Profile Sidebar -->
+  <div id="overlay" style="display:none;"></div>
+
+  <!-- Profile Sidebar -->
+  <aside class="profile-sidebar" id="profileSidebar">
+    <div class="profile-header">
+      <h3>My Profile</h3>
+      <button id="closeProfile">&times;</button>
+    </div>
+
+    <div class="profile-content">
+      <div class="profile-avatar-wrapper">
+        <img id="profileAvatar" src="log0.png" alt="Profile Avatar">
+        <input type="file" id="uploadProfileAvatar" accept="image/*" style="display:none;">
+        <button id="changeProfileAvatar">Choose Profile</button>
+      </div>
+
+      <label for="usernameInput">Username</label>
+      <input type="text" id="usernameInput" placeholder="Enter your username">
+
+      <label for="bioInput">Bio</label>
+      <textarea id="bioInput" placeholder="Write something about yourself..."></textarea>
+
+      <label for="statusSelect">Status</label>
+      <select id="statusSelect">
+        <option value="online">Online</option>
+        <option value="offline">Offline</option>
+      </select>
+
+      <button id="saveProfileBtn">Save Profile</button>
+    </div>
+  </aside>
+
+  <script src="client.js"></script>
+</body>
+</html>
